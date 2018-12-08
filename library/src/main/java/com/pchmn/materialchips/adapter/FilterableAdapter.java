@@ -210,8 +210,9 @@ public class FilterableAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             filteredList.clear();
+
             FilterResults results = new FilterResults();
-            if (constraint.length() == 0) {
+            if (constraint.length() == 0 || !mFilterEnabled) {
                 filteredList.addAll(originalList);
             } else {
                 final String filterPattern = constraint.toString().toLowerCase().trim();
