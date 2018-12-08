@@ -38,10 +38,12 @@ public class FilterableListView extends RelativeLayout {
     private List<? extends ChipInterface> mFilterableList;
     // others
     private ChipsInput mChipsInput;
+    private boolean mFilterEnabled;
 
-    public FilterableListView(Context context) {
+    public FilterableListView(Context context, boolean mFilterEnabled) {
         super(context);
         mContext = context;
+        this.mFilterEnabled = mFilterEnabled;
         init();
     }
 
@@ -63,7 +65,7 @@ public class FilterableListView extends RelativeLayout {
         mChipsInput = chipsInput;
 
         // adapter
-        mAdapter = new FilterableAdapter(mContext, mRecyclerView, filterableList, chipsInput, backgroundColor, textColor);
+        mAdapter = new FilterableAdapter(mContext, mRecyclerView, filterableList, chipsInput, backgroundColor, textColor, mFilterEnabled);
         mRecyclerView.setAdapter(mAdapter);
         if(backgroundColor != null)
             mRecyclerView.getBackground().setColorFilter(backgroundColor.getDefaultColor(), PorterDuff.Mode.SRC_ATOP);

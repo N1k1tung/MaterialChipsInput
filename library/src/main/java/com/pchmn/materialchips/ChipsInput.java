@@ -58,6 +58,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
     private ColorStateList mChipDetailedBackgroundColor;
     private ColorStateList mFilterableListBackgroundColor;
     private ColorStateList mFilterableListTextColor;
+    private boolean mFilterEnabled = true;
     // chips listener
     private List<ChipsListener> mChipsListenerList = new ArrayList<>();
     private ChipsListener mChipsListener;
@@ -125,6 +126,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
                 // filterable list
                 mFilterableListBackgroundColor = a.getColorStateList(R.styleable.ChipsInput_filterable_list_backgroundColor);
                 mFilterableListTextColor = a.getColorStateList(R.styleable.ChipsInput_filterable_list_textColor);
+                mFilterEnabled = a.getBoolean(R.styleable.ChipsInput_filterable_list_filterEnabled, true);
             }
             finally {
                 a.recycle();
@@ -338,7 +340,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
 
     public void setFilterableList(List<? extends ChipInterface> list) {
         mChipList = list;
-        mFilterableListView = new FilterableListView(mContext);
+        mFilterableListView = new FilterableListView(mContext, mFilterEnabled);
         mFilterableListView.build(mChipList, this, mFilterableListBackgroundColor, mFilterableListTextColor);
         mChipsAdapter.setFilterableListView(mFilterableListView);
     }
